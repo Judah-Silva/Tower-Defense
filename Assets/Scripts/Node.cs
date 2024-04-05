@@ -9,8 +9,12 @@ public class Node : MonoBehaviour
     public Color notEnoughMoneyColor;
     public Vector3 positionOffset;
     
-    [Header("Optional")]
+    [HideInInspector]
     public GameObject turret;
+
+    [HideInInspector] public TurretBlueprint turretBlueprint;
+
+    [HideInInspector] public bool isUpgraded = false;
     
     private Renderer rend;
     private Color startColor;
@@ -30,24 +34,68 @@ public class Node : MonoBehaviour
         return transform.position + positionOffset;
     }
 
+    void BuildTurret(TurretBlueprint _turretBlueprint)
+    {
+        if (PlayerStats.money < _turretBlueprint.cost)
+        {
+            Debug.Log("Not enough money to build that!");
+            return;
+        }
+
+        PlayerStats.money -= _turretBlueprint.cost;
+        
+        GameObject _turret = (GameObject)Instantiate(_turretBlueprint.prefab, GetBuildPosition(), Quaternion.identity);
+        turret = _turret;
+
+        turretBlueprint = _turretBlueprint;
+
+        GameObject effect = (GameObject)Instantiate(buildManager.buildEffect, GetBuildPosition(), Quaternion.identity);
+        Destroy(effect, 5f);
+        
+        Debug.Log($"Turret built! Remaining money: {PlayerStats.money}");
+    }
+
+    public void UpgradeTurret()
+    {
+        if (PlayerStats.money < turretBlueprint.upgradeCost)
+        {
+            Debug.Log("Not enough money to build that!");
+            return;
+        }
+
+        PlayerStats.money -= turretBlueprint.upgradeCost;
+        
+        Destroy(turret);
+        
+        GameObject _turret = (GameObject)Instantiate(turretBlueprint.upgradedPrefab, GetBuildPosition(), Quaternion.identity);
+        turret = _turret;
+
+        GameObject effect = (GameObject)Instantiate(buildManager.buildEffect, GetBuildPosition(), Quaternion.identity);
+        Destroy(effect, 5f);
+
+        isUpgraded = true;
+        
+        Debug.Log($"Turret built! Remaining money: {PlayerStats.money}");
+    }
+
     void OnMouseDown()
     {
         if (EventSystem.current.IsPointerOverGameObject())
         {
             return;
         }
+        
+        if (turret != null)
+        {
+            buildManager.SelectNode(this);
+            return;
+        }
+
         if (!buildManager.CanBuild)
         {
             return;
         }
-        
-        if (turret != null)
-        {
-            Debug.Log("Turret already placed here");
-            return;
-        }
-
-        buildManager.BuildTurretOn(this);
+        BuildTurret(buildManager.GetTurretToBuild());
     }
 
     void OnMouseEnter()
