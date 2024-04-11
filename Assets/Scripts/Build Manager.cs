@@ -7,6 +7,7 @@ public class BuildManager : MonoBehaviour
 {
     public static BuildManager instance;
     public GameObject buildEffect;
+    public GameObject sellEffect;
     public NodeUI nodeUI;
     
     private TurretBlueprint turretToBuild;
@@ -29,7 +30,7 @@ public class BuildManager : MonoBehaviour
     
     public bool HasMoney
     {
-        get { return PlayerStats.money >= turretToBuild.cost;  }
+        get { return PlayerStats.Money >= turretToBuild.cost;  }
     }
     
     

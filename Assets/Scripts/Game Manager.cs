@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public GameObject gameOverUI;
+    public GameObject completeLevelUI;
     
     public static bool GameIsOver;
 
@@ -33,5 +34,11 @@ public class GameManager : MonoBehaviour
         GameIsOver = true;
         gameOverUI.SetActive(true);
         Debug.Log("Game Over!");
+    }
+
+    public void WinLevel()
+    {
+        GameIsOver = true;
+        completeLevelUI.SetActive(true);
     }
 }
