@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3938421380252728806}
   - component: {fileID: 413242204974666362}
   - component: {fileID: 7441026552696585338}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Health BG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,8 @@ GameObject:
   - component: {fileID: 7016476818101513093}
   - component: {fileID: -3253943645538991630}
   - component: {fileID: 4569560230142295510}
-  m_Layer: 0
+  - component: {fileID: 7676949000538759057}
+  m_Layer: 6
   m_Name: Basic Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -176,7 +177,7 @@ SphereCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -198,7 +199,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startSpeed: 10
   startHealth: 100
-  speed: 20
   moneyGain: 50
   deathEffect: {fileID: 6568512876054111489, guid: d631f4319a8c2b045a37830da9241bf0, type: 3}
   healthBar: {fileID: 8066309378211775907}
@@ -214,6 +214,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 330d78b0962a3d54d9d74061a9830fa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!195 &7676949000538759057
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2074531339662662100}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 10
+  m_Acceleration: 100
+  avoidancePriority: 50
+  m_AngularSpeed: 1000
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1
+  m_BaseOffset: 0.5
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &2890034534804157040
 GameObject:
   m_ObjectHideFlags: 0
@@ -226,7 +248,7 @@ GameObject:
   - component: {fileID: 8493138359896429551}
   - component: {fileID: 2327551050791965468}
   - component: {fileID: 6002600299628553478}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -327,7 +349,7 @@ GameObject:
   - component: {fileID: 1145941856062673121}
   - component: {fileID: 5317596629111437795}
   - component: {fileID: 8066309378211775907}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Health Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}

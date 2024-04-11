@@ -2,15 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
     public float startSpeed = 10f;
     public float startHealth = 100f;
-    
-    [HideInInspector]
-    public float speed;
+
+    private NavMeshAgent agent;
     
     private float health;
     
@@ -21,12 +21,14 @@ public class Enemy : MonoBehaviour
     [Header("Unity Stuff")] 
     public Image healthBar;
 
+    [HideInInspector]
     private bool isDead = false;
 
     void Start()
     {
-        speed = startSpeed;
         health = startHealth;
+        agent = GetComponent<NavMeshAgent>();
+        agent.speed = startSpeed;
     }
     
     public void TakeDamage(float amount)
@@ -56,7 +58,7 @@ public class Enemy : MonoBehaviour
 
     public void Slow(float pct)
     {
-        speed = startSpeed * (1f - pct);
+        agent.speed = startSpeed * (1f - pct);
     }
 
 }
