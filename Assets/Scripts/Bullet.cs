@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -9,7 +10,6 @@ public class Bullet : MonoBehaviour
     public float explosionRadius = 0f;
     public int damage = 50;
     public GameObject impactEffect;
-    
     
     private Transform target;
     
@@ -65,6 +65,8 @@ public class Bullet : MonoBehaviour
                 Damage(collider.transform);
             }
         }
+
+        CameraShake.Instance.Shake(2, .1f);
     }
 
     void Damage(Transform enemy)

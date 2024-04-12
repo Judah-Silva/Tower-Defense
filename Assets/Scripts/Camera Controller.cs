@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public float panSpeed = 30f;
-    public float panBorderThickness = 10f;
+    public float rotationSpeed = 2f;
+    public CinemachineVirtualCamera camera;
+
     public float scrollSpeed = 5f;
+
     public float minY = 10f;
     public float maxY = 80f;
 
@@ -19,22 +22,13 @@ public class CameraController : MonoBehaviour
             this.enabled = false;
             return;
         }
-        
-        if (Input.GetKey(KeyCode.W) || Input.mousePosition.y >= Screen.height - panBorderThickness)
+
+        if (Input.GetKey(KeyCode.Mouse2))
         {
-            transform.Translate(Vector3.forward * (panSpeed * Time.deltaTime), Space.World);
-        } 
-        if (Input.GetKey(KeyCode.S) || Input.mousePosition.y <= panBorderThickness)
-        {
-            transform.Translate(Vector3.back * (panSpeed * Time.deltaTime), Space.World);
-        } 
-        if (Input.GetKey(KeyCode.A) || Input.mousePosition.x <= panBorderThickness)
-        {
-            transform.Translate(Vector3.left * (panSpeed * Time.deltaTime), Space.World);
-        } 
-        if (Input.GetKey(KeyCode.D) || Input.mousePosition.x >= Screen.width - panBorderThickness)
-        {
-            transform.Translate(Vector3.right * (panSpeed * Time.deltaTime), Space.World);
+            float xMove = Input.GetAxis("Mouse X") * rotationSpeed;// * Time.deltaTime;
+            // float yMove = Input.GetAxis("Mouse Y") * rotationSpeed * Time.deltaTime;
+            
+            camera.transform.RotateAround(camera.LookAt.position, Vector3.up, xMove);
         }
 
         float scroll = Input.GetAxis("Mouse ScrollWheel");

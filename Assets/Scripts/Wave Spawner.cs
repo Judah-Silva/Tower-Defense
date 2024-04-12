@@ -16,7 +16,7 @@ public class WaveSpawner : MonoBehaviour
 
     public GameManager gameManager;
 
-    private float countdown = 2f;
+    private float countdown = 20f;
     private int waveNumber = 0;
     void Update()
     {
